@@ -1,0 +1,14 @@
+{
+  "name": "mocha-selenium-bridge",
+  "version": "0.0.1",
+  "description": "Run tests in the browser, report results in Node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eemeli Aro <eemeli@gmail.com>",
+  "license": "ISC",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}
