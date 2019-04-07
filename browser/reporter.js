@@ -101,6 +101,10 @@ function Bridge(runner) {
   window._TEST_EVENTS = []
   window._TEST_RUNNER = simpleRunner(runner)
 
+  runner.on(EVENT_RUN_END, function() {
+    window._TEST_EVENTS.push(['stats', runner.stats])
+  })
+
   for (var i = 0; i < handlers.length; ++i) {
     var key = handlers[i][0]
     var handler = handlers[i][1]
