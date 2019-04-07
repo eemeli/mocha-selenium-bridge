@@ -2,6 +2,8 @@
   "name": "mocha-selenium-bridge",
   "version": "0.0.1",
   "description": "Run tests in the browser, report results in Node",
+  "main": "lib/exec.js",
+  "bin": "lib/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,5 +12,10 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "dependencies": {
+    "mocha": "^6.1.0",
+    "selenium-webdriver": "^4.0.0-alpha.1",
+    "yargs": "^13.2.2"
   }
 }
