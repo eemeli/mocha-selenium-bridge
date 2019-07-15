@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "mocha": "^6.1.4",
-    "selenium-webdriver": "^4.0.0-alpha.1",
+    "selenium-webdriver": "^4.0.0-alpha.4",
     "yaml": "^1.6.0",
     "yargs": "^13.2.4"
   }
