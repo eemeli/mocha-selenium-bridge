@@ -1,3 +1,5 @@
+var events = []
+
 function Bridge(runner) {
   function simpleError(err) {
     return {
@@ -49,13 +51,13 @@ function Bridge(runner) {
 
   function plainEvent(name) {
     return function() {
-      window._TEST_EVENTS.push([name])
+      events.push([name])
     }
   }
 
   function suiteEvent(name) {
     return function(suite) {
-      window._TEST_EVENTS.push([name, simpleSuite(suite)])
+      events.push([name, simpleSuite(suite)])
     }
   }
 
@@ -63,7 +65,7 @@ function Bridge(runner) {
     return function(test, err) {
       var ev = [name, simpleTest(test)]
       if (err) ev.push(simpleError(err))
-      window._TEST_EVENTS.push(ev)
+      events.push(ev)
     }
   }
 
@@ -98,11 +100,11 @@ function Bridge(runner) {
     [EVENT_TEST_RETRY, testEvent]
   ]
 
-  window._TEST_EVENTS = []
+  window._TEST_EVENTS = events
   window._TEST_RUNNER = simpleRunner(runner)
 
   runner.on(EVENT_RUN_END, function() {
-    window._TEST_EVENTS.push(['stats', runner.stats])
+    events.push(['stats', runner.stats])
   })
 
   for (var i = 0; i < handlers.length; ++i) {
@@ -110,6 +112,36 @@ function Bridge(runner) {
     var handler = handlers[i][1]
     runner.on(key, handler(key))
   }
+
+  function packError(error) {
+    var obj = { _TEST_ERROR: error.message }
+    if (error.name !== 'Error') obj.name = error.name
+    var keys = Object.keys(error)
+    for (var i = 0; i < keys.length; ++i) {
+      var key = keys[i]
+      obj[key] = error[key]
+    }
+    obj.stack = error.stack
+    return obj
+  }
+
+  function capture(method) {
+    var orig = console[method]
+    return function() {
+      var ev = ['console', method]
+      for (var j = 0; j < arguments.length; ++j) {
+        var arg = arguments[j]
+        var obj = arg instanceof Error ? packError(arg) : arg
+        ev.push(JSON.stringify(obj))
+      }
+      events.push(ev)
+      orig.apply(null, arguments)
+    }
+  }
+
+  console.error = capture('error')
+  console.log = capture('log')
+  console.warn = capture('warn')
 }
 
 if (mocha) mocha.reporter(Bridge)
