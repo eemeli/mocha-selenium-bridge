@@ -39,8 +39,10 @@ As your tests run, the Mocha test events will be queued in a buffer that'll be r
 To make that work, a CLI is provided. This command will spawn a new headless Chrome instance and open your local file `test.html` in it. Provided that it includes a `mocha.run()` call, the tests will automatically run, and on completion the browser will be closed:
 
 ```
-npx mocha-selenium-bridge --browser chrome test.html
+npx mocha-selenium-bridge test.html --browser chrome
 ```
+
+By default, messages logged to the browser console will be also logged to the terminal, and any calls to `console.error` will cause the test run to fail. To adjust this behaviour, use `--silent` and `--allow-console`.
 
 For more complete documentation of the CLI, use its `--help` argument. Note in particular `--driver`, which allows you to define and build your own WebDriver for use e.g. with [BrowserStack] or other Selenium cloud providers.
 
