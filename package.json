@@ -12,7 +12,7 @@
     "lib/"
   ],
   "scripts": {
-    "test": "node lib/cli.js --browser chrome test/index.html"
+    "test": "node lib/cli.js test/index.html --browser chrome"
   },
   "prettier": {
     "semi": false,
