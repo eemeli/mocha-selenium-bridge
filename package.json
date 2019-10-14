@@ -1,6 +1,6 @@
 {
   "name": "mocha-selenium-bridge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Run tests in the browser, report results in Node",
   "license": "ISC",
   "author": "Eemeli Aro <eemeli@gmail.com>",
