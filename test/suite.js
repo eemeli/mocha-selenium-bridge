@@ -9,11 +9,18 @@ describe('test events', function() {
 })
 
 describe('console capture', function() {
-  it('this test uses console.log', function() {
+  it('using console.log', function() {
     console.log('log-msg', 42, { foo: 'bar' })
   })
 
-  it('this test uses console.error', function() {
+  it('using console.error', function() {
     console.error('err-msg', new Error('log-error'))
+  })
+
+  it('logs a circular object', () => {
+    var foo = {}
+    var bar = { foo: foo }
+    foo.bar = bar
+    console.log(foo)
   })
 })

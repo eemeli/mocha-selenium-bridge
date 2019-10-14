@@ -132,7 +132,11 @@ function Bridge(runner) {
       for (var j = 0; j < arguments.length; ++j) {
         var arg = arguments[j]
         var obj = arg instanceof Error ? packError(arg) : arg
-        ev.push(JSON.stringify(obj))
+        try {
+          ev.push(JSON.stringify(obj))
+        } catch (error) {
+          ev.push(JSON.stringify(packError(error)))
+        }
       }
       events.push(ev)
       orig.apply(null, arguments)
