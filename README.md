@@ -6,10 +6,10 @@ The normal way of using Mocha and Selenium together is a bit tricky, as practica
 
 ## Setup
 
-First, install the package:
+First, install the package along with `mocha` itself:
 
 ```
-npm install --save-dev mocha-selenium-bridge
+npm install --save-dev mocha-selenium-bridge mocha
 ```
 
 Next, prepare your [browser-based tests] as usual. In addition to including mocha.js, also add our `Bridge` reporter:

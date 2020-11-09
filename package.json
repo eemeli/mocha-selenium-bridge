@@ -19,9 +19,14 @@
     "singleQuote": true
   },
   "dependencies": {
-    "mocha": "^7.2.0",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "yaml": "^1.10.0",
     "yargs": "^16.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  },
+  "peerDependencies": {
+    "mocha": ">=6"
   }
 }
