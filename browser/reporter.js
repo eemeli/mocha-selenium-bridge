@@ -148,4 +148,4 @@ function Bridge(runner) {
   console.warn = capture('warn')
 }
 
-if (mocha) mocha.reporter(Bridge)
+if (typeof mocha !== 'undefined') mocha.reporter(Bridge)
