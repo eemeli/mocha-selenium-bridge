@@ -50,19 +50,19 @@ function Bridge(runner) {
   }
 
   function plainEvent(name) {
-    return function() {
+    return function () {
       events.push([name])
     }
   }
 
   function suiteEvent(name) {
-    return function(suite) {
+    return function (suite) {
       events.push([name, simpleSuite(suite)])
     }
   }
 
   function testEvent(name) {
-    return function(test, err) {
+    return function (test, err) {
       var ev = [name, simpleTest(test)]
       if (err) ev.push(simpleError(err))
       events.push(ev)
@@ -103,7 +103,7 @@ function Bridge(runner) {
   window._TEST_EVENTS = events
   window._TEST_RUNNER = simpleRunner(runner)
 
-  runner.on(EVENT_RUN_END, function() {
+  runner.on(EVENT_RUN_END, function () {
     events.push(['stats', runner.stats])
   })
 
@@ -127,7 +127,7 @@ function Bridge(runner) {
 
   function capture(method) {
     var orig = console[method]
-    return function() {
+    return function () {
       var ev = ['console', method]
       for (var j = 0; j < arguments.length; ++j) {
         var arg = arguments[j]
